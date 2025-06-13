@@ -1,35 +1,33 @@
 package com.mvp.store.storeApp.entities;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 
-public class Store {
+public class Supplier {
     @Id
     @GeneratedValue
     @Column(updatable = false, nullable = false)
     Long id;
 
-    @Column
-    String item_name;
+    @Column(nullable = false)
+    String name;
 
     @Column
-    Float price;
+    String contact;
 
-    @Column
-    Integer quantity;
-
-
-  @ManyToOne
-  @JoinColumn(name = "supplier_id", nullable = false)
-  Supplier supplier;
-
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Store> items;
 }
+
+
