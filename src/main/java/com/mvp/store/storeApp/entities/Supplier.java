@@ -20,7 +20,7 @@ public class Supplier {
     @Column(updatable = false, nullable = false)
     Long id;
 
-    @Column(nullable = false)
+    @Column
     String name;
 
     @Column
@@ -29,6 +29,5 @@ public class Supplier {
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Store> items; // A list that holds all the items supplied by the supplier
 }
-
 
 // "Owns the relationship" means the 'supplier' field in the Store class controls the database link
