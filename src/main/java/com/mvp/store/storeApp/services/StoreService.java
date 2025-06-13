@@ -6,8 +6,8 @@ import java.util.List;
 
 public  interface StoreService {
     List<Store> getItems();
-    Store getStoreById(Long id);
+    Store getItemById(Long id);
     Store insert(Store store);
-    void updateStore(Long id, Store store);
-    void deleteStore(Long storeId);
+    void updateItem(Long id, Store store);
+    void deleteItem(Long itemId);
 }
