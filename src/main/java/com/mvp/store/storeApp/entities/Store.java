@@ -27,7 +27,6 @@ public class Store {
     @Column
     Integer quantity;
 
-
   @ManyToOne
   @JoinColumn(name = "supplier_id", nullable = false)
   Supplier supplier;

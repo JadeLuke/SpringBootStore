@@ -30,7 +30,7 @@ public class Supplier {
     // - 'cascade = CascadeType.ALL' means any changes to Supplier (like save/delete) will apply to its Stores.
     // - 'orphanRemoval = true' means if a Store is removed from the list, it will be deleted
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Store> items; // A list that holds all the items (stores) supplied by the supplier
+    List<Store> items; // A list that holds all the items supplied by the supplier
 }
 
 
