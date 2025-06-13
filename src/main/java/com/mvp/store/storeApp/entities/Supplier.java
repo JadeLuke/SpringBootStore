@@ -30,4 +30,3 @@ public class Supplier {
     List<Store> items; // A list that holds all the items supplied by the supplier
 }
 
-// "Owns the relationship" means the 'supplier' field in the Store class controls the database link
