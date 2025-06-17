@@ -44,7 +44,7 @@ public class StoreServiceImpl implements StoreService {
         itemsFromDb.setItem_name(store.getItem_name());
         itemsFromDb.setQuantity(store.getQuantity());
         itemsFromDb.setPrice(store.getPrice());
-        itemsFromDb.setSupplier(store.getSupplier());
+//        itemsFromDb.setSupplier(store.getSupplier());
 
 
         storeRepository.save(itemsFromDb);
