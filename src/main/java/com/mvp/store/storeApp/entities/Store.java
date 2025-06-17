@@ -20,7 +20,7 @@ public class Store {
     @Column(updatable = false, nullable = false)
     Long id;
 
-    @Column
+    @Column(unique = true)
     String item_name;
 
     @Column
