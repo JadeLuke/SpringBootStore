@@ -21,7 +21,7 @@ public class Supplier {
     @Column(updatable = false, nullable = false)
     Long id;
 
-    @Column
+    @Column(unique = true)
     String name;
 
     @Column
