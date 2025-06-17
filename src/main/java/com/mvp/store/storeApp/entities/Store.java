@@ -7,10 +7,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "items")
 
 public class Store {
     @Id
@@ -27,8 +29,6 @@ public class Store {
     @Column
     Integer quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "supplier_id", nullable = false)
-    Supplier supplier;
+
 
 }
