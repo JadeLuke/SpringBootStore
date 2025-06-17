@@ -2,9 +2,8 @@ package com.mvp.store.storeApp.services;
 
 
 
-import com.mvp.store.storeApp.entities.Store;
+
 import com.mvp.store.storeApp.entities.Supplier;
-import com.mvp.store.storeApp.repositories.StoreRepository;
 import com.mvp.store.storeApp.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -19,13 +18,13 @@ public class SupplierServiceImpl implements SupplierService {
         this.supplierRepository = supplierRepository;
     }
     @Override
-    public List<Store> getItems() {
-        List<Store> Items = new ArrayList<>();
-        supplierRepository.findAll().forEach(Items::add);
-        return Items;
+    public List<Supplier> getSupplier() {
+        List<Supplier> supplier = new ArrayList<>();
+        supplierRepository.findAll().forEach(supplier::add);
+        return supplier;
     }
     @Override
-    public Supplier getItemById(Long id) {
+    public Supplier getSupplierById(Long id) {
         return supplierRepository.findById(id).get();
     }
     @Override
@@ -33,19 +32,23 @@ public class SupplierServiceImpl implements SupplierService {
         return supplierRepository.save(supplier);
     }
     @Override
-    public void updateItem
-            (Long id, Store store) {
-        Store itemsFromDb = supplierRepository.findById(id).get();
-        System.out.println(itemsFromDb.toString());
-        itemsFromDb.setItem_name(store.getItem_name());
-        itemsFromDb.setPrice(store.getPrice());
-        itemsFromDb.setQuantity(store.getQuantity());
-        itemsFromDb.setSupplier(store.getSupplier());
-        supplierRepository.save(itemsFromDb);
+    public void updateSupplier
+            (Long id, Supplier supplier) {
+     Supplier supplierFromDb = supplierRepository.findById(id).get();
+        System.out.println(supplierFromDb.toString());
+     supplierFromDb.setName(supplier.getName());
+      supplierFromDb.setContact(supplier.getContact());
+
+        supplierRepository.save(supplierFromDb);
     }
+
     @Override
-    public void deleteItem(Long itemId) {
-       supplierRepository.deleteById(itemId);
-    }}
+    public void deleteSupplier(Long id) {
+        supplierRepository.deleteById(id);
+    }
+
+    }
+
+
 
 

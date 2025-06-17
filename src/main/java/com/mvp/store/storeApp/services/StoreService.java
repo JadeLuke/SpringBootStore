@@ -9,5 +9,5 @@ public  interface StoreService {
     Store getItemById(Long id);
     Store insert(Store store);
     void updateItem(Long id, Store store);
-    void deleteItem(Long itemId);
+    void deleteById(Long itemId);
 }
