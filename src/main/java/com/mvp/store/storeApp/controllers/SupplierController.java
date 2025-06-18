@@ -36,8 +36,6 @@ public class SupplierController {
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Supplier Not found: ID " + supplierId);
         }
-
-//        return new ResponseEntity<>(supplierService.getSupplierById(supplierId), HttpStatus.OK);
     }
 
     @PostMapping("/")

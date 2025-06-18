@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class StoreServiceImpl implements StoreService {
 
@@ -27,8 +29,8 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public Store getItemById(Long id) {
-        return storeRepository.findById(id).get();
+    public Optional<Store> getItemById(Long id) {
+        return storeRepository.findById(id);
     }
 
     @Override
