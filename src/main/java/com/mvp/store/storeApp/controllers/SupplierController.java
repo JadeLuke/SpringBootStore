@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/supplier")
@@ -26,8 +27,17 @@ public class SupplierController {
     }
 
     @GetMapping({"/{supplierId}"})
-    public ResponseEntity<Supplier> getSupplier(@PathVariable Long supplierId){
-        return new ResponseEntity<>(supplierService.getSupplierById(supplierId), HttpStatus.OK);
+    public ResponseEntity<?> getSupplier(@PathVariable Long supplierId){
+        Optional<Supplier>supplier = supplierService.getSupplierById(supplierId);
+
+        if (supplier.isPresent()){
+            return ResponseEntity.ok(supplier.get());
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Supplier Not found: ID " + supplierId);
+        }
+
+//        return new ResponseEntity<>(supplierService.getSupplierById(supplierId), HttpStatus.OK);
     }
 
     @PostMapping("/")
@@ -39,7 +49,7 @@ public class SupplierController {
     }
 
     @PutMapping({"/{supplierId}"})
-    public ResponseEntity<Supplier> updateSupplier(@PathVariable("supplierId") Long supplierId, @RequestBody Supplier supplier){
+    public ResponseEntity<Optional<Supplier>> updateSupplier(@PathVariable("supplierId") Long supplierId, @RequestBody Supplier supplier){
         supplierService.updateSupplier(supplierId, supplier);
         return new ResponseEntity<>(supplierService.getSupplierById(supplierId), HttpStatus.OK);
     }
