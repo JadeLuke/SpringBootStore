@@ -30,7 +30,7 @@ public class Supplier {
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_item_id", referencedColumnName = "id")
+    @JoinColumn(name = "fk_item_id", referencedColumnName = "id", nullable = false)
     List<Store> store;
 }
 
