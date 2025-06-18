@@ -8,6 +8,7 @@ import com.mvp.store.storeApp.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
@@ -24,8 +25,8 @@ public class SupplierServiceImpl implements SupplierService {
         return supplier;
     }
     @Override
-    public Supplier getSupplierById(Long id) {
-        return supplierRepository.findById(id).get();
+    public Optional <Supplier> getSupplierById(Long id) {
+        return supplierRepository.findById(id);
     }
     @Override
     public Supplier insert(Supplier supplier) {

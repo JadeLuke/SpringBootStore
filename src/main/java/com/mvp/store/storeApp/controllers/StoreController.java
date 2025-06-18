@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/store")
@@ -27,9 +28,14 @@ public class StoreController {
     }
 
     @GetMapping({"/{itemId}"})
-    public ResponseEntity<Store> getItem(@PathVariable Long itemId){
-        Store store = storeService.getItemById(itemId);
-            return new ResponseEntity<>(storeService.getItemById(itemId), HttpStatus.OK);
+    public ResponseEntity<?> getItem(@PathVariable Long itemId){
+        Optional<Store> store = storeService.getItemById(itemId);
+        if (store.isPresent()){
+         return ResponseEntity.ok(store.get());
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found: ID " + itemId);
+        }
     }
 
     @PostMapping("/")
@@ -41,7 +47,7 @@ public class StoreController {
     }
 
     @PutMapping({"/{itemId}"})
-    public ResponseEntity<Store> updateItem(@PathVariable("itemId") Long itemId, @RequestBody Store store){
+    public ResponseEntity<Optional<Store>> updateItem(@PathVariable("itemId") Long itemId, @RequestBody Store store){
         storeService.updateItem(itemId, store);
         return new ResponseEntity<>(storeService.getItemById(itemId),HttpStatus.OK);
     }
