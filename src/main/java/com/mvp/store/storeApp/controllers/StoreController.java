@@ -55,6 +55,6 @@ public class StoreController {
     @DeleteMapping({"/{itemId}"})
     public ResponseEntity<String> deleteItem(@PathVariable("itemId") Long itemId){
         storeService.deleteById(itemId);
-        return new ResponseEntity<>("Item Deleted!",HttpStatus.OK);
+        return new ResponseEntity<>("Item Deleted!",HttpStatus.NOT_FOUND);
     }
 }

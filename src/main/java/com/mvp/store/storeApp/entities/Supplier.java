@@ -21,10 +21,10 @@ public class Supplier {
     @Column(updatable = false, nullable = false)
     Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     String name;
 
-    @Column
+    @Column(nullable = false)
     String contact;
 
 

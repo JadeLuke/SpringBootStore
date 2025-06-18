@@ -20,13 +20,13 @@ public class Store {
     @Column(updatable = false, nullable = false)
     Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     String item_name;
 
-    @Column
+    @Column(nullable = false)
     Float price;
 
-    @Column
+    @Column(nullable = false)
     Integer quantity;
 
 
