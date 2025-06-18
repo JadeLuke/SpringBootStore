@@ -28,7 +28,8 @@ public class StoreController {
 
     @GetMapping({"/{itemId}"})
     public ResponseEntity<Store> getItem(@PathVariable Long itemId){
-        return new ResponseEntity<>(storeService.getItemById(itemId), HttpStatus.OK);
+        Store store = storeService.getItemById(itemId);
+            return new ResponseEntity<>(storeService.getItemById(itemId), HttpStatus.OK);
     }
 
     @PostMapping("/")
@@ -46,8 +47,8 @@ public class StoreController {
     }
 
     @DeleteMapping({"/{itemId}"})
-    public ResponseEntity<Store> deleteItem(@PathVariable("itemId") Long itemId){
+    public ResponseEntity<String> deleteItem(@PathVariable("itemId") Long itemId){
         storeService.deleteById(itemId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>("Item Deleted!",HttpStatus.OK);
     }
 }
