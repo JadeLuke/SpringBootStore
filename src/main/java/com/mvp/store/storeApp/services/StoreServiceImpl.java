@@ -39,18 +39,33 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void updateItem
-            (Long id, Store store) {
-        Store itemsFromDb = storeRepository.findById(id).get();
-        System.out.println(itemsFromDb.toString());
+//    public void updateItem
+//            (Long id, Store store) {
+//        Store itemsFromDb = storeRepository.findById(id).get();
+//        System.out.println(itemsFromDb.toString());
+//        itemsFromDb.setItem_name(store.getItem_name());
+//        itemsFromDb.setQuantity(store.getQuantity());
+//        itemsFromDb.setPrice(store.getPrice());
+//
+//
+//        storeRepository.save(itemsFromDb);
+//    }
+    public void updateItem(Long id, Store store) {
+        Optional<Store> optionalItem = storeRepository.findById(id);
+
+        if (optionalItem.isEmpty()) {
+            throw new RuntimeException("Item with ID " + id + " not found.");
+        }
+
+        Store itemsFromDb = optionalItem.get();
+
         itemsFromDb.setItem_name(store.getItem_name());
         itemsFromDb.setQuantity(store.getQuantity());
         itemsFromDb.setPrice(store.getPrice());
-//        itemsFromDb.setSupplier(store.getSupplier());
-
 
         storeRepository.save(itemsFromDb);
     }
+
 
     @Override
     public void deleteById(Long itemId) {
