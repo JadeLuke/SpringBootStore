@@ -5,6 +5,7 @@ import com.mvp.store.storeApp.entities.Store;
 import com.mvp.store.storeApp.services.StoreService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/store")
+@CrossOrigin(origins = "http://localhost:4200")
 public class StoreController {
 
     StoreService storeService;
@@ -46,15 +48,29 @@ public class StoreController {
         return new ResponseEntity<>(store1, httpHeaders, HttpStatus.CREATED);
     }
 
-    @PutMapping({"/{itemId}"})
-    public ResponseEntity<Optional<Store>> updateItem(@PathVariable("itemId") Long itemId, @RequestBody Store store){
-        storeService.updateItem(itemId, store);
-        return new ResponseEntity<>(storeService.getItemById(itemId),HttpStatus.OK);
+
+
+    @PutMapping(value = "/{itemId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> updateItem(
+            @PathVariable("itemId") Long itemId,
+            @RequestParam("item_name") String itemName,
+            @RequestParam("price") Float price,
+            @RequestParam("quantity") Integer quantity
+    ) {
+        Store item = new Store();
+        item.setItem_name(itemName);
+        item.setPrice(price);
+        item.setQuantity(quantity);
+
+        storeService.updateItem(itemId, item);
+
+        return new ResponseEntity<>(storeService.getItemById(itemId), HttpStatus.OK);
     }
+
 
     @DeleteMapping({"/{itemId}"})
     public ResponseEntity<String> deleteItem(@PathVariable("itemId") Long itemId){
         storeService.deleteById(itemId);
-        return new ResponseEntity<>("Item Deleted!",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Item Deleted!",HttpStatus.NO_CONTENT);
     }
 }
